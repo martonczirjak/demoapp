@@ -1,4 +1,4 @@
-package com.plixapp.czirjak.plixapp.login
+package com.plixapp.czirjak.plixapp.wilds
 
 import android.databinding.DataBindingUtil
 import android.support.v7.app.AppCompatActivity
@@ -13,7 +13,7 @@ import com.plixapp.czirjak.plixapp.login.requests.LoginRequest
 /**
  * A login screen that offers login via email/password.
  */
-class PlixAppLoginActivity : AppCompatActivity() {
+class WildsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +21,7 @@ class PlixAppLoginActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
 
         binding.emailSignInButton.setOnClickListener {
-            LoginRequest(
+           val a = LoginRequest(
                 binding.email.text.toString(),
                 binding.password.text.toString(),
                 Response.Listener { succesResponse ->
@@ -30,6 +30,8 @@ class PlixAppLoginActivity : AppCompatActivity() {
                 Response.ErrorListener { response ->
                     Toast.makeText(this, R.string.error_invalid_password, Toast.LENGTH_LONG).show()
                 }).send(this)
+
+
         }
     }
 }

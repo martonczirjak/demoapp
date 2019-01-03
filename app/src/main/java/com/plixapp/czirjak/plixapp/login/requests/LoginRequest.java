@@ -1,6 +1,5 @@
-package com.plixapp.czirjak.plixapp.login;
+package com.plixapp.czirjak.plixapp.login.requests;
 
-import com.android.volley.Request;
 import com.android.volley.Response;
 import com.rainy.networkhelper.annotation.*;
 import com.rainy.networkhelper.request.ParserRequest;
