@@ -1,4 +1,4 @@
-package com.plixapp.czirjak.plixapp.wilds.requests;
+package com.plixapp.czirjak.plixapp.wilds.model;
 
 import java.util.ArrayList;
 

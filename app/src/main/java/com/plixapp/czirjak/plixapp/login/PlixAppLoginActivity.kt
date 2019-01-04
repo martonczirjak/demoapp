@@ -1,5 +1,6 @@
 package com.plixapp.czirjak.plixapp.login
 
+import android.app.ActivityOptions
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.support.v7.app.AppCompatActivity
@@ -18,21 +19,29 @@ import com.plixapp.czirjak.plixapp.wilds.WildsActivity
 class PlixAppLoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
+    private var loginRequest: LoginRequest? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
 
         binding.emailSignInButton.setOnClickListener {
-            LoginRequest(
+           loginRequest = LoginRequest(
                 binding.email.text.toString(),
                 binding.password.text.toString(),
                 Response.Listener { succesResponse ->
                     Toast.makeText(this, "Sikeres belépés.", Toast.LENGTH_LONG).show()
-                    startActivity(Intent(this, WildsActivity::class.java))
+                    startActivity(Intent(this, WildsActivity::class.java), ActivityOptions.makeCustomAnimation(this, R.anim.abc_slide_in_bottom, R.anim.abc_slide_out_top).toBundle())
                 },
                 Response.ErrorListener { response ->
-                    Toast.makeText(this, R.string.error_invalid_password, Toast.LENGTH_LONG).show()
-                }).send(this)
+                    Toast.makeText(this, R.string.error_invalid_credentials, Toast.LENGTH_LONG).show()
+                })
+
+            loginRequest?.send(this)
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        loginRequest?.cancel()
     }
 }
